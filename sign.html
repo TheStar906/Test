@@ -1,81 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Find Your Zodiac Sign</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 20px;
-        }
-        h1 {
-            color: #333;
-        }
-        #result {
-            margin-top: 20px;
-            font-weight: bold;
-            color: #0066cc;
-        }
-    </style>
+<title>HTML Editor</title>
+<style>
+  #editor {
+    width: 500px;
+    height: 300px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    font-family: monospace;
+  }
+</style>
 </head>
 <body>
 
-    <h1>Find Your Zodiac Sign</h1>
-    <label for="birthday">Enter your birthday (DD-MM-YYYY):</label>
-    <input type="text" id="birthday" placeholder="DD-MM-YYYY">
-    <button onclick="findZodiac()">Check Zodiac Sign</button>
+<h1>HTML Editor</h1>
 
-    <div id="result"></div>
+<textarea id="editor"></textarea>
 
-    <script>
-        function findZodiac() {
-            const input = document.getElementById('birthday').value;
-            const parts = input.split('-');
+<button onclick="displayHTML()">Display HTML</button>
 
-            if (parts.length !== 3) {
-                document.getElementById('result').innerText = 'Invalid date format. Please use DD-MM-YYYY.';
-                return;
-            }
+<div id="output"></div>
 
-            const day = parseInt(parts[0], 10);
-            const month = parseInt(parts[1], 10);
-
-            let zodiacSign = '';
-
-            if ((month == 1 && day >= 20) || (month == 2 && day <= 18)) {
-                zodiacSign = 'Aquarius';
-            } else if ((month == 2 && day >= 19) || (month == 3 && day <= 20)) {
-                zodiacSign = 'Pisces';
-            } else if ((month == 3 && day >= 21) || (month == 4 && day <= 19)) {
-                zodiacSign = 'Aries';
-            } else if ((month == 4 && day >= 20) || (month == 5 && day <= 20)) {
-                zodiacSign = 'Taurus';
-            } else if ((month == 5 && day >= 21) || (month == 6 && day <= 20)) {
-                zodiacSign = 'Gemini';
-            } else if ((month == 6 && day >= 21) || (month == 7 && day <= 22)) {
-                zodiacSign = 'Cancer';
-            } else if ((month == 7 && day >= 23) || (month == 8 && day <= 22)) {
-                zodiacSign = 'Leo';
-            } else if ((month == 8 && day >= 23) || (month == 9 && day <= 22)) {
-                zodiacSign = 'Virgo';
-            } else if ((month == 9 && day >= 23) || (month == 10 && day <= 22)) {
-                zodiacSign = 'Libra';
-            } else if ((month == 10 && day >= 23) || (month == 11 && day <= 21)) {
-                zodiacSign = 'Scorpio';
-            } else if ((month == 11 && day >= 22) || (month == 12 && day <= 21)) {
-                zodiacSign = 'Sagittarius';
-            } else if ((month == 12 && day >= 22) || (month == 1 && day <= 19)) {
-                zodiacSign = 'Capricorn';
-            } else {
-                zodiacSign = 'Invalid date';
-            }
-
-            document.getElementById('result').innerText = 'Your Zodiac Sign is: ' + zodiacSign;
-        }
-    </script>
+<script>
+  function displayHTML() {
+    const editorContent = document.getElementById("editor").value;
+    const outputDiv = document.getElementById("output");
+    outputDiv.innerHTML = editorContent;
+    // Important: sanitize user input if you intend to use this example in a real application. 
+    // (using a library or more robust technique)
+  }
+</script>
 
 </body>
 </html>

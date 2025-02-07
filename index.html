@@ -5,33 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Simple Page</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 20px;
-        }
-        h1 {
-            color: #333;
-        }
-        button {
-            padding: 10px 15px;
-            background-color: #007BFF;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #0056b3;
-        }
+        /* ... (styles) ... */
     </style>
 </head>
 <body>
-
     <h1>Welcome to My Simple Page!</h1>
-    <p>This is a basic webpage created with HTML. Click the button below to do something!</p>
-    <button onclick="alert('Button Clicked!')">Click Me!</button>
+    <p>Enter Python code below.  Click the button to execute.</p>
+    <textarea id="pythonCode" rows="4" cols="50"></textarea>
+    <button id="runPython">Run Python Code</button>
+    <div id="output"></div>
 
+    <script>
+        const runButton = document.getElementById("runPython");
+        const pythonCodeInput = document.getElementById("pythonCode");
+        const outputDiv = document.getElementById("output");
+
+        runButton.addEventListener("click", () => {
+          const codeToRun = pythonCodeInput.value;
+
+          fetch("/run_python", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ code: codeToRun })
+          })
+            .then(response => response.json())
+            .then(data => {
+              outputDiv.textContent = data.result || "No output.";  // Show no output neatly.
+            })
+            .catch(error => {
+              console.error("Error:", error);
+              outputDiv.textContent = "Error running code.";
+            });
+        });
+    </script>
 </body>
 </html>

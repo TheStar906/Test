@@ -24,17 +24,24 @@
 <body>
 
     <h1>Find Your Zodiac Sign</h1>
-    <label for="birthday">Enter your birthday (YYYY-MM-DD):</label>
-    <input type="date" id="birthday">
+    <label for="birthday">Enter your birthday (DD-MM-YYYY):</label>
+    <input type="text" id="birthday" placeholder="DD-MM-YYYY">
     <button onclick="findZodiac()">Check Zodiac Sign</button>
 
     <div id="result"></div>
 
     <script>
         function findZodiac() {
-            const birthday = new Date(document.getElementById('birthday').value);
-            const month = birthday.getMonth() + 1;
-            const day = birthday.getDate();
+            const input = document.getElementById('birthday').value;
+            const parts = input.split('-');
+
+            if (parts.length !== 3) {
+                document.getElementById('result').innerText = 'Invalid date format. Please use DD-MM-YYYY.';
+                return;
+            }
+
+            const day = parseInt(parts[0], 10);
+            const month = parseInt(parts[1], 10);
 
             let zodiacSign = '';
 
